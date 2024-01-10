@@ -43,28 +43,28 @@ for(int i = 0 ; i < BankAccountSize ; i++){
 
 
 
-// try
-// {
-//     Console.WriteLine("withdrawal test");
-//     account[0].MakeWithdrawal(500, DateTime.Now, "Rent payment");
-//     Console.WriteLine("{0,-20}{1,-20}{2,-20}",account[0].Number,account[0].Owner,account[0].Balance);
+try
+{
+    Console.WriteLine("withdrawal test");
+    account[0].MakeWithdrawal(500, DateTime.Now, "Rent payment");
+    Console.WriteLine("{0,-20}{1,-20}{2,-20}",account[0].Number,account[0].Owner,account[0].Balance);
 
-//     Console.WriteLine("deposit test");
-//     account[0].MakeDeposit(100, DateTime.Now, "Friend paid me back");
-//     Console.WriteLine("{0,-20}{1,-20}{2,-20}",account[0].Number,account[0].Owner,account[0].Balance);
-//     account[0].MakeWithdrawal(750, DateTime.Now, "attemp to overdraw");
-// }
-// catch(InvalidOperationException e){
-//     Console.WriteLine("exception caught trying to overdraw");
-//     Console.WriteLine(e.ToString());
-//     return;
-// }
-// catch(ArgumentOutOfRangeException e){
-//     Console.WriteLine("amount is not invalid ");
-//     Console.WriteLine(e.ToString());
-//     return;
+    Console.WriteLine("deposit test");
+    account[0].MakeDeposit(100, DateTime.Now, "Friend paid me back");
+    Console.WriteLine("{0,-20}{1,-20}{2,-20}",account[0].Number,account[0].Owner,account[0].Balance);
+    account[0].MakeWithdrawal(750, DateTime.Now, "attemp to overdraw");
+}
+catch(InvalidOperationException e){
+    Console.WriteLine("exception caught trying to overdraw");
+    Console.WriteLine(e.ToString());
+    return;
+}
+catch(ArgumentOutOfRangeException e){
+    Console.WriteLine("amount is not invalid ");
+    Console.WriteLine(e.ToString());
+    return;
 
-// }
+}
 
 
 BankAccount invalidAccount;
