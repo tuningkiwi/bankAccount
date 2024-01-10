@@ -3,7 +3,7 @@
 const int BankAccountSize =3;
 
 
-BankAccount[] arr = new BankAccount[BankAccountSize];
+BankAccount[] account = new BankAccount[BankAccountSize];
 
 // BankAccount account = new BankAccount("dong",1000);
 
@@ -28,8 +28,8 @@ for(int i = 0 ; i < BankAccountSize ; i++){
         _balance = Convert.ToDecimal(balance); 
     }
     
-    arr[i] = new BankAccount(owner,_balance);
-    Console.WriteLine("Account {0}was created for {1} with {2} initial balance",arr[i].Number,arr[i].Owner,arr[i].Balance);
+    account[i] = new BankAccount(owner,_balance);
+    Console.WriteLine("Account {0}was created for {1} with {2} initial balance",account[i].Number,account[i].Owner,account[i].Balance);
     
 }
 
@@ -38,5 +38,44 @@ Console.WriteLine("CURRENT BANK ACCOUNT LIST");
 Console.WriteLine("{0,-20}{1,-20}{2,-20}","NUMBER","OWNER","BALANCE");
 //Console.WriteLine($"{,10}NUMBER{,40}OWNER{,60}BALANCE");
 for(int i = 0 ; i < BankAccountSize ; i++){
-    Console.WriteLine("{0,-20}{1,-20}{2,-20}",arr[i].Number,arr[i].Owner,arr[i].Balance);
+    Console.WriteLine("{0,-20}{1,-20}{2,-20}",account[i].Number,account[i].Owner,account[i].Balance);
+}
+
+
+
+// try
+// {
+//     Console.WriteLine("withdrawal test");
+//     account[0].MakeWithdrawal(500, DateTime.Now, "Rent payment");
+//     Console.WriteLine("{0,-20}{1,-20}{2,-20}",account[0].Number,account[0].Owner,account[0].Balance);
+
+//     Console.WriteLine("deposit test");
+//     account[0].MakeDeposit(100, DateTime.Now, "Friend paid me back");
+//     Console.WriteLine("{0,-20}{1,-20}{2,-20}",account[0].Number,account[0].Owner,account[0].Balance);
+//     account[0].MakeWithdrawal(750, DateTime.Now, "attemp to overdraw");
+// }
+// catch(InvalidOperationException e){
+//     Console.WriteLine("exception caught trying to overdraw");
+//     Console.WriteLine(e.ToString());
+//     return;
+// }
+// catch(ArgumentOutOfRangeException e){
+//     Console.WriteLine("amount is not invalid ");
+//     Console.WriteLine(e.ToString());
+//     return;
+
+// }
+
+
+BankAccount invalidAccount;
+
+try
+{
+    invalidAccount = new BankAccount("invalid",-55);
+}
+catch(ArgumentOutOfRangeException e)
+{
+    Console.WriteLine("Exception caught creating account with negative balance");
+    Console.WriteLine(e.ToString());
+    return;
 }

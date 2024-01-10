@@ -19,24 +19,55 @@ public class BankAccount {
     //예금주
     public string Owner{get;set;}
     //잔액
-    public decimal Balance{get; set;}
+    public decimal Balance{
+        get{
+                decimal balance = 0 ; 
+
+                foreach(var item in _allTransactions){
+
+                    balance += item.Amount;
+                }
+
+               return balance; 
+        }
+        
+    }
 
     //입금
     public void MakeDeposit(decimal amount, DateTime date, string note){
+        if(amount <= 0){
+            throw new ArgumentOutOfRangeException(nameof(amount),"Amount of deposit must be positive");
+        }
+        var deposit = new Transaction(amount, date, note);
+        _allTransactions.Add(deposit);
 
     }
     
     //인출
     public void MakeWithdrawal(decimal amount, DateTime date, string note){
+        if(amount <=0){//인출금액이 음수일 때
+            throw new ArgumentOutOfRangeException(nameof(amount),"Amount of withdrawal must be positive");
+        }
+        if(Balance - amount <0 ){//인출하면 음수가 될때
+            throw new InvalidOperationException("Not sufficient funds for this withdrawal");
+        }
+
+        var withdrawal = new Transaction(-amount,date,note);
+        _allTransactions.Add(withdrawal);
 
     }
 
     public BankAccount(string name, decimal initialBalance){
         Owner = name;
-        Balance = initialBalance;    
+        MakeDeposit(initialBalance,DateTime.Now, "Initial balance");
+        //Balance = initialBalance;    
         Number = s_accountNumberSeed.ToString("D10");
         s_accountNumberSeed++;
         
     }
+
+    private List<Transaction> _allTransactions = new List<Transaction>();
+
+
 
 }
